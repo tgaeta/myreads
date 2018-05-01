@@ -17,7 +17,7 @@ class ListBooks extends Component {
       {status: 'Read'},
     ]
 
-    const BookShelfLabel =
+    const BookShelf =
       readingStatus.map((book, i) => (
         <BookShelf key={i} status={book.status} books={books} />
       ))
@@ -29,7 +29,7 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            {BookShelfLabel}
+            {BookShelf}
           </div>
         </div>
         <div className="open-search">
