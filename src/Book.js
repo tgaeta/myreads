@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 
 class Book extends Component {
-
   render() {
-    const { books } = this.props    
-    
+    const { books } = this.props
     const bookShelfChanger = (
       <div className='book-shelf-changer'>
         <select>
@@ -16,19 +14,17 @@ class Book extends Component {
         </select>
       </div>
     )
-
-    const book = (
-      <li>
-        {books.map((book) => (
-          <div className='book' key={book.id}>
-            <div className='book-top'>
-              <div className='book-cover' style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
-              {bookShelfChanger}
-            </div>
-            <div className='book-title'>{book.title}</div>
-            <div className='book-authors'>{book.authors.join(', ')}</div>
+  
+    const book = books.map((book) =>
+      <li key={book.id}>
+        <div className='book'>
+          <div className='book-top'>
+            <div className='book-cover' style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
+            {bookShelfChanger}
           </div>
-        ))}        
+          <div className='book-title'>{book.title}</div>
+            <div className='book-authors'>{book.authors}</div>
+        </div>
       </li>
     )
 
