@@ -2,28 +2,29 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Book from './Book'
 import * as BooksAPI from './BooksAPI'
-import PropTypes from 'prop-types'
 
 class Search extends Component {
   state = {
     query: '',
     results: [],
-    view: 'search',
   }
 
-  updateQuery = (query) => {
-    this.setState(() => ({
-      query: query,
-    }))
-  }
+  handleBookSearch = (query) => {
+    if (query === '') {
+      this.setState(() => ({results: []}))
+    } else {
+        BooksAPI.search(query, 20).then(results => {
+          if(results.error) {
+            this.setState({results: []});
+          } else {
+            this.setState(() => ({results: results}))
+          }
+        })     
+    }
+};
 
   componentDidMount() {
-    BooksAPI.search('manage')
-      .then((results) => {
-        this.setState(() => ({
-          results
-        }))
-      })
+    this.handleBookSearch(this.state.query)
   }
 
   render() {
@@ -35,24 +36,18 @@ class Search extends Component {
             <input 
               type='text' 
               placeholder='Search by title or author'
-              value={this.state.query}
-              onChange={(event) => this.updateQuery(event.target.value)}
+              onChange={(event) => this.handleBookSearch(event.target.value)}
             />
           </div>
         </div>
         <div className='search-books-results'>
           <ol className='books-grid'>
-            <Book books={this.state.results} view={this.state.view} />
+            <Book books={this.state.results} />
           </ol>
         </div>
       </div>
     );
   }
-
-  static propTypes = {
-    view: PropTypes.string.isRequired,
-  }
 }
-
 
 export default Search
