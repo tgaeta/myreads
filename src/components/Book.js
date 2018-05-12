@@ -2,11 +2,8 @@ import React, { Component } from 'react'
 import BookShelfChanger from './BookShelfChanger'
 
 class Book extends Component {
-  state = {
-    shelf: '',
-  }
   render() {
-    const { books, onShelfChange } = this.props
+    const { books } = this.props
 
     let book
     if (books) {

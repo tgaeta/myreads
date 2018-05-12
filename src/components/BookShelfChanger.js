@@ -3,17 +3,14 @@ import PropTypes from 'prop-types'
 
 class BookShelfChanger extends Component {
   static propTypes = {
-    shelf: PropTypes.string,
-    onShelfChange : PropTypes.func.isRequired
+    book: PropTypes.string,
   }
 
   render() {
-    const { shelf, onShelfChange } = this.props
+    const { book } = this.props
     return (
       <div className='book-shelf-changer'>
-        <select 
-          defaultValue={shelf || 'none'} 
-          onChange={(event) => onShelfChange(event.target.value)}>
+        <select defaultValue={book.shelf || 'none'} >
           <option value='none' disabled>Move to...</option>
           <option value='currentlyReading'>Currently Reading</option>
           <option value='wantToRead'>Want to Read</option>
