@@ -20,8 +20,8 @@ class Search extends Component {
             this.setState(() => ({results: results}))
           }
         })     
-    }
-};
+      }
+  }
 
   componentDidMount() {
     this.handleBookSearch(this.state.query)
@@ -36,13 +36,13 @@ class Search extends Component {
             <input 
               type='text' 
               placeholder='Search by title or author'
-              onChange={(event) => this.handleBookSearch(event.target.value)}
+              onChange={(e) => this.handleBookSearch(e.target.value)}
             />
           </div>
         </div>
         <div className='search-books-results'>
           <ol className='books-grid'>
-            <Book books={this.state.results} />
+            <Book books={this.state.results} onChangeShelf={this.props.onChangeShelf}/>
           </ol>
         </div>
       </div>

@@ -3,10 +3,11 @@ import BookShelfChanger from './BookShelfChanger'
 
 class Book extends Component {
   render() {
-    const { books } = this.props
+    console.log(this.props)
+    const { books, onChangeShelf } = this.props
 
     let book
-    if (books) {
+    if (books) {  
       book = books.map((book) =>
         <li key={book.id}>
           <div className='book'>
@@ -16,7 +17,7 @@ class Book extends Component {
             ) : (
               <div className='book-cover' style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
             )}
-              <BookShelfChanger book={book} />
+              <BookShelfChanger book={book} onChangeShelf={onChangeShelf} activeShelf={book.shelf || 'none'} />
             </div>
             <div className='book-title'>{book.title}</div>
               <div className='book-authors'>{book.authors}</div>

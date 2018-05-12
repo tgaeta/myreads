@@ -18,6 +18,18 @@ class BooksApp extends React.Component {
     this.getAllBooks()
   }
 
+  changeShelf = (book, shelf) => {
+    if (this.state.books) {
+      BooksAPI.update(book, shelf).then(() => {
+        book.shelf = shelf;
+        this.setState(state => ({
+          books: state.books.filter(b => b.id !== book.id).concat([ book ])
+        })),
+        this.setBooksToShelf(this.state.books)
+      })
+    }
+  }
+
   getAllBooks = () => {
     BooksAPI
       .getAll()
@@ -49,20 +61,27 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className='app'>
-        <Route path='/search' render={() => (<Search/>)}/>
-        <Route
-          exact
-          path='/'
-          render={() => (
+        <Route path='/search' render={() => (
+          <Search books={this.state.books} onChangeShelf={this.changeShelf}/>)}/>
+        <Route exact path='/'render={() => (
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
               <div>
-                <BookShelf bookshelfTitle='Currently Reading' books={this.state.currentlyReading}/>
-                <BookShelf bookshelfTitle='Want to Read' books={this.state.wantToRead}/>
-                <BookShelf bookshelfTitle='Read' books={this.state.read}/>
+                <BookShelf
+                  bookshelfTitle='Currently Reading' 
+                  onChangeShelf={this.changeShelf} 
+                  books={this.state.currentlyReading}/>
+                <BookShelf
+                  bookshelfTitle='Want to Read' 
+                  onChangeShelf={this.changeShelf} 
+                  books={this.state.wantToRead}/>
+                <BookShelf
+                  bookshelfTitle='Read' 
+                  onChangeShelf={this.changeShelf} 
+                  books={this.state.read}/>
               </div>
             </div>
             <div className="open-search">
