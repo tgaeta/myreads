@@ -1,26 +1,33 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import Book from './Book'
 import * as BooksAPI from '../utils/BooksAPI'
 
 class Search extends Component {
   state = {
     query: '',
-    results: [],
+    results: []
   }
 
-  handleBookSearch = (query) => {
+  handleBookSearch = query => {
     if (query === '') {
-      this.setState(() => ({results: []}))
+      this.setState(() => ({
+        results: []
+      }))
     } else {
-        BooksAPI.search(query, 20).then(results => {
-          if(results.error) {
-            this.setState({results: []});
-          } else {
-            this.setState(() => ({results: results}))
-          }
-        })     
-      }
+      BooksAPI.search(query, 20).then(results => {
+        if (results.error) {
+          this.setState(() => ({
+            results: []
+          }))
+        } else {
+          this.setState(() => ({
+            results: results
+          }))
+        }
+      })
+    }
   }
 
   componentDidMount() {
@@ -29,25 +36,35 @@ class Search extends Component {
 
   render() {
     return (
-      <div className='search-books'>
-        <div className='search-books-bar'>
-          <Link to='/' className='close-search'>Close</Link>
-          <div className='search-books-input-wrapper'>
-            <input 
-              type='text' 
-              placeholder='Search by title or author'
-              onChange={(e) => this.handleBookSearch(e.target.value)}
+      <div className="search-books">
+        <div className="search-books-bar">
+          <Link to="/" className="close-search">
+            Close
+          </Link>
+          <div className="search-books-input-wrapper">
+            <input
+              type="text"
+              placeholder="Search by title or author"
+              onChange={e => this.handleBookSearch(e.target.value)}
             />
           </div>
         </div>
-        <div className='search-books-results'>
-          <ol className='books-grid'>
-            <Book books={this.state.results} onChangeShelf={this.props.onChangeShelf}/>
+        <div className="search-books-results">
+          <ol className="books-grid">
+            <Book
+              books={this.state.results}
+              onChangeShelf={this.props.onChangeShelf}
+            />
           </ol>
         </div>
       </div>
-    );
+    )
   }
+}
+
+Search.propTypes = {
+  books: PropTypes.array.isRequired,
+  onChangeShelf: PropTypes.func.isRequired
 }
 
 export default Search
