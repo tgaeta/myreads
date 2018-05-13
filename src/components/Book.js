@@ -25,12 +25,12 @@ const Book = props => {
   } else {
     book = (<p> No results </p>)
   }
+
   return (
     <ol className='books-grid'>
       {book}
     </ol>
   )
-
 }
 
 export default Book
