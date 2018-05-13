@@ -6,7 +6,6 @@ import * as BooksAPI from '../utils/BooksAPI'
 
 class Search extends Component {
   state = {
-    query: '',
     results: []
   }
 
@@ -16,7 +15,7 @@ class Search extends Component {
         results: []
       }))
     } else {
-      BooksAPI.search(query, 20).then(results => {
+      BooksAPI.search(query).then(results => {
         if (results.error) {
           this.setState(() => ({
             results: []
@@ -30,17 +29,23 @@ class Search extends Component {
     }
   }
 
-  componentDidMount() {
-    this.handleBookSearch(this.state.query)
-  }
+  // someFunction = (books, results) => {
+  //   books.map(book => {
+  //     this.setState(() => ({
+  //       results: results.map(result => {
+  //         if (book.name === result.name) {
+  //           result['shelf'] = book.shelf
+  //         }
+  //       })
+  //     }))
+  //   })
+  // }
 
   render() {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link to="/" className="close-search">
-            Close
-          </Link>
+          <Link to="/" className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
             <input
               type="text"
@@ -51,10 +56,11 @@ class Search extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            <Book
-              books={this.state.results}
-              onChangeShelf={this.props.onChangeShelf}
-            />
+            { this.state.results.map(book =>
+              <li key={book.id}>
+                <Book book={book} onChangeShelf={this.props.onChangeShelf} />
+              </li>
+            )}
           </ol>
         </div>
       </div>

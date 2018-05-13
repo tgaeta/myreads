@@ -9,7 +9,13 @@ const BookShelf = props => {
     <div className='bookshelf'>
       <h2 className='bookshelf-title'>{bookshelfTitle}</h2>
       <div className='bookshelf-books'>
-        <Book books={books} onChangeShelf={onChangeShelf} />
+        <ol className='books-grid'>
+          { books.map(book =>
+            <li key={book.id}>
+              <Book book={book} onChangeShelf={onChangeShelf} />
+            </li>
+          )}
+        </ol>
       </div>
     </div>
   )

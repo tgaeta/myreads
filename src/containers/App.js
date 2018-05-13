@@ -23,8 +23,8 @@ class BooksApp extends React.Component {
         book.shelf = shelf
         this.setState(state => ({
           books: state.books.filter(b => b.id !== book.id).concat([book])
-        })),
-          this.setBooksToShelf(this.state.books)
+        }))
+        this.setBooksToShelf(this.state.books)
       })
     }
   }
