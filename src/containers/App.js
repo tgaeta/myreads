@@ -63,6 +63,11 @@ class BooksApp extends React.Component {
   }
 
   render() {
+    const bookShelves = [
+      {title: 'Currently Reading', id: 'currentlyReading'},
+      {title: 'Want to Read', id: 'wantToRead'},
+      {title: 'Read', id: 'read'},
+    ]
     return (
       <div className="app">
         <Route
@@ -81,21 +86,14 @@ class BooksApp extends React.Component {
               </div>
               <div className="list-books-content">
                 <div>
-                  <BookShelf
-                    bookshelfTitle="Currently Reading"
-                    onChangeShelf={this.changeShelf}
-                    books={this.state.currentlyReading}
-                  />
-                  <BookShelf
-                    bookshelfTitle="Want to Read"
-                    onChangeShelf={this.changeShelf}
-                    books={this.state.wantToRead}
-                  />
-                  <BookShelf
-                    bookshelfTitle="Read"
-                    onChangeShelf={this.changeShelf}
-                    books={this.state.read}
-                  />
+                  { bookShelves.map((shelf, index) =>
+                    <BookShelf
+                      key={index}
+                      bookshelfTitle={shelf.title}
+                      onChangeShelf={this.changeShelf}
+                      books={this.state[`${shelf.id}`]}
+                    />
+                  )}
                 </div>
               </div>
               <div className="open-search">
