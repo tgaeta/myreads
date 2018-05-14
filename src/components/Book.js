@@ -8,18 +8,16 @@ const Book = props => {
   return (
     <div className='book'>
       <div className='book-top'>
-        {book.imageLinks === undefined ? (
-          <div className='book-cover' style={{ width: 128, height: 193 }} />
-        ) : (
-          <div
-            className='book-cover'
-            style={{
-              width: 128,
-              height: 193,
-              backgroundImage: `url(${book.imageLinks.smallThumbnail})`
-            }}
-          />
-        )}
+        {book.imageLinks === undefined 
+          ? (<div className='book-cover' style={{ width: 128, height: 193 }} />)
+          : (<div
+                className='book-cover'
+                style={{
+                  width: 128,
+                  height: 193,
+                  backgroundImage: `url(${book.imageLinks.smallThumbnail})`
+                }}
+              />)}
         <BookShelfChanger
           book={book}
           onChangeShelf={onChangeShelf}
