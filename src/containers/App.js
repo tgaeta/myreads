@@ -47,7 +47,7 @@ class BooksApp extends React.Component {
       wantToRead: book => want.push(book),
       read: book => reading.push(book)
     }
-    // use forEach since you aren't returning values from your map iterations
+
     books.forEach(book => {
       const updateArray = cases[book.shelf]
       if (updateArray) {
