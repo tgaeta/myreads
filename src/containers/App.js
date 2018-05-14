@@ -70,36 +70,30 @@ class BooksApp extends React.Component {
     ]
     return (
       <div className='app'>
-        <Route
-          path='/search'
-          render={() => (
-            <Search books={this.state.books} onChangeShelf={this.changeShelf} />
-          )}
-        />
-        <Route
-          exact
-          path='/'
-          render={() => (
-            <div className='list-books'>
-              <div className='list-books-title'>
-                <h1>MyReads</h1>
-              </div>
-              <div className='list-books-content'>
-                <div>
-                  {bookShelves.map((shelf, index) => (
-                    <BookShelf
-                      key={index}
-                      bookshelfTitle={shelf.title}
-                      onChangeShelf={this.changeShelf}
-                      books={this.state[`${shelf.id}`]}
-                    />
-                  ))}
-                </div>
-              </div>
-              <div className='open-search'>
-                <Link to='/search'>Add a book</Link>
+        <Route path='/search'render={() => (
+          <Search books={this.state.books} onChangeShelf={this.changeShelf} />
+        )}/>
+        <Route exact path='/' render={() => (
+          <div className='list-books'>
+            <div className='list-books-title'>
+              <h1>MyReads</h1>
+            </div>
+            <div className='list-books-content'>
+              <div>
+                {bookShelves.map((shelf, index) => (
+                  <BookShelf
+                    key={index}
+                    bookshelfTitle={shelf.title}
+                    onChangeShelf={this.changeShelf}
+                    books={this.state[`${shelf.id}`]}
+                  />
+                ))}
               </div>
             </div>
+            <div className='open-search'>
+              <Link to='/search'>Add a book</Link>
+            </div>
+          </div>
           )}
         />
       </div>
