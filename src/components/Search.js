@@ -29,19 +29,14 @@ class Search extends Component {
     }
   }
 
-  // someFunction = (books, results) => {
-  //   books.map(book => {
-  //     this.setState(() => ({
-  //       results: results.map(result => {
-  //         if (book.name === result.name) {
-  //           result['shelf'] = book.shelf
-  //         }
-  //       })
-  //     }))
-  //   })
-  // }
-
   render() {
+    const { books, onChangeShelf } = this.props
+    const { results } = this.state
+    const correctedBooks = results.map(result => {
+      const assignShelf = books.find( book => book.id === result.id)
+      return Object.assign({}, assignShelf, result)
+    })
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -56,9 +51,9 @@ class Search extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            { this.state.results.map(book =>
+            { correctedBooks.map(book =>
               <li key={book.id}>
-                <Book book={book} onChangeShelf={this.props.onChangeShelf} />
+                <Book book={book} onChangeShelf={onChangeShelf} />
               </li>
             )}
           </ol>
