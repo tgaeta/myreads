@@ -7,7 +7,7 @@ class BookShelfChanger extends Component {
   }
 
   render() {
-    const { book, activeShelf } = this.props
+    const { activeShelf } = this.props
     return (
       <div className='book-shelf-changer'>
         <select defaultValue={activeShelf} onChange={e => this.updateBook(e.target.value)}>
@@ -23,7 +23,7 @@ class BookShelfChanger extends Component {
 }
 
 BookShelfChanger.propTypes = {
-  books: PropTypes.array,
+  book: PropTypes.object.isRequired,
   onChangeShelf: PropTypes.func.isRequired,
   activeShelf: PropTypes.string.isRequired
 }
