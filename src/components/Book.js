@@ -29,11 +29,9 @@ const Book = props => {
       <div className='book-title'>{book.title}</div>
       <div className='book-authors'>
         <div>
-          {book.authors && book.authors.length > 1 ? (
-            book.authors.join(', ')
-          ) : (
-            book.authors
-          )}
+          {book.authors && book.authors.length > 1
+            ? book.authors.join(', ')
+            : book.authors}
         </div>
       </div>
     </div>

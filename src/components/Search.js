@@ -33,29 +33,31 @@ class Search extends Component {
     const { books, onChangeShelf } = this.props
     const { results } = this.state
     const correctedBooks = results.map(result => {
-      const assignShelf = books.find( book => book.id === result.id)
+      const assignShelf = books.find(book => book.id === result.id)
       return Object.assign({}, assignShelf, result)
     })
 
     return (
-      <div className="search-books">
-        <div className="search-books-bar">
-          <Link to="/" className="close-search">Close</Link>
-          <div className="search-books-input-wrapper">
+      <div className='search-books'>
+        <div className='search-books-bar'>
+          <Link to="/" className='close-search'>
+            Close
+          </Link>
+          <div className='search-books-input-wrapper'>
             <input
-              type="text"
-              placeholder="Search by title or author"
+              type='text'
+              placeholder='Search by title or author'
               onChange={e => this.handleBookSearch(e.target.value)}
             />
           </div>
         </div>
-        <div className="search-books-results">
-          <ol className="books-grid">
-            { correctedBooks.map(book =>
+        <div className='search-books-results'>
+          <ol className='books-grid'>
+            {correctedBooks.map(book => (
               <li key={book.id}>
                 <Book book={book} onChangeShelf={onChangeShelf} />
               </li>
-            )}
+            ))}
           </ol>
         </div>
       </div>
